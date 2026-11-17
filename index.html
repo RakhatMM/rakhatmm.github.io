@@ -1,33 +1,393 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Startup</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Rakhat Meiramov, Senior Data Scientist at ISSAI, Nazarbayev University. Speech recognition for Kazakh and Russian, and LLM agents.">
+<meta name="author" content="Rakhat Meiramov">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rakhat Meiramov">
+<meta property="og:description" content="Rakhat Meiramov, Senior Data Scientist at ISSAI, Nazarbayev University. Speech recognition for Kazakh and Russian, and LLM agents.">
+<meta property="og:url" content="https://rakhatmm.github.io/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://rakhatmm.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a5f86'/%3E%3Ctext x='16' y='22' font-family='Arial,Helvetica,sans-serif' font-size='15' font-weight='700' text-anchor='middle' fill='%23ffffff'%3ERM%3C/text%3E%3C/svg%3E">
+<title>Rakhat Meiramov</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one left-aligned reading column. On wide screens each section is a row with a
+   small mono label on the left and the content on the right; on phones the label sits above. */
+:root {
+  color-scheme: light;
+  --bg: #fbfcfd;
+  --fg: #0f1a24;
+  --muted: #485867;
+  --accent: #0a5f86;
+  --accent-soft: #e2eff6;
+  --font-text: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --measure: 40rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0d141b;
+    --fg: #e8eef3;
+    --muted: #a3b3c0;
+    --accent: #74c7ec;
+    --accent-soft: #15303f;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0d141b;
+  --fg: #e8eef3;
+  --muted: #a3b3c0;
+  --accent: #74c7ec;
+  --accent-soft: #15303f;
+}
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+*, *::before, *::after { box-sizing: border-box; }
 
-    <!-- Bootstrap CSS from a CDN. This way you don't have to include the bootstrap file yourself -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-    <!-- Your own stylesheet -->
-    <link rel="stylesheet" type="text/css" href="style.css">
-  </head>
-  <body>
-    <div class="container d-flex justify-content-center align-items-center h-100">
-      <div class="row">
-        <header class="text-center col-12">
-          <h1 class="text-uppercase"><strong>The biggest start</strong></h1>
-        </header>
-        <div class="buffer col-12"></div>
-        <section class="text-center col-12">
-          <hr>
-          <a href="https://mailchi.mp/9ba77d69ae8f/startup"><button type="button" class="btn btn-primary btn-xl">Find out more</button></a>
-        </section>
-      </div>
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-text);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-wrap: break-word;
+}
+
+img { max-width: 100%; }
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.page {
+  max-width: 56rem;
+  margin-inline: auto;
+  padding-block: 3.5rem 3rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.sections { display: flex; flex-direction: column; gap: 3rem; }
+
+/* Intro */
+.intro { display: flex; flex-direction: column; gap: 0.35rem; }
+.intro h1 {
+  margin: 0;
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 2.9rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.intro .role { margin: 0.4rem 0 0; font-size: 1.15rem; font-weight: 500; }
+.intro .where {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.links {
+  list-style: none;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.4rem;
+}
+.links li { min-width: 0; }
+
+/* Section rows */
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.7rem;
+}
+.row > h2 {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.row > .body { min-width: 0; max-width: var(--measure); }
+@media (min-width: 46rem) {
+  .row { grid-template-columns: 9rem minmax(0, 1fr); gap: 2rem; }
+  .row > h2 { padding-top: 0.38rem; }
+}
+
+.prose { display: flex; flex-direction: column; gap: 0.8rem; }
+.prose p { margin: 0; }
+
+/* Lists of work, papers and roles */
+.items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.items > li { min-width: 0; }
+.items h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+.items p { margin: 0; }
+.items .authors { color: var(--fg); }
+.items .authors strong { font-weight: 600; }
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.items p.meta { margin-top: 0.35rem; }
+.items p.about { margin-top: 0.55rem; }
+.vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.meta a { white-space: nowrap; }
+
+.tag {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.08rem 0.5rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  vertical-align: 0.12em;
+}
+
+.roles > li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.1rem 1.5rem;
+}
+.roles .what { min-width: 0; flex: 1 1 22rem; }
+.roles .what h3 { margin-bottom: 0.1rem; }
+.roles .what p { color: var(--muted); font-size: 0.98rem; }
+.roles .when {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.foot {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.foot p { margin: 0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="intro">
+    <h1>Rakhat Meiramov</h1>
+    <p class="role">Senior Data Scientist at <a href="https://issai.nu.edu.kz/">ISSAI</a>, Nazarbayev University</p>
+    <p class="where">Astana, Kazakhstan</p>
+    <ul class="links">
+      <li><a href="mailto:meiramov.rakhat@gmail.com">meiramov.rakhat@gmail.com</a></li>
+      <li><a href="Rakhat_Meiramov_CV.pdf">CV (PDF)</a></li>
+      <li><a href="https://github.com/RakhatMM">GitHub</a></li>
+      <li><a href="https://huggingface.co/RakhatM">Hugging Face</a></li>
+      <li><a href="https://www.linkedin.com/in/rakhat-meiramov/">LinkedIn</a></li>
+    </ul>
+  </header>
+
+  <main class="sections">
+
+  <section class="row" aria-labelledby="h-about">
+    <h2 id="h-about">About</h2>
+    <div class="body prose">
+      <p>I am a Senior Data Scientist at the Institute of Smart Systems and Artificial Intelligence (ISSAI) at Nazarbayev University, where I have worked since 2023. I have an M.S. and a B.S. in Computer Science from Nazarbayev University.</p>
+      <p>Most of my work so far is on speech recognition for Kazakh and Russian. My recent work is on LLM agents: agents that adapt a speech recognition model to a new speech domain, and rule-based controllers built from the agents' traces that run without an LLM. I would like to continue working on LLM agents.</p>
+      <p class="meta">Interests: LLM agents · fine-tuning of language and speech models · low-resource languages</p>
     </div>
-  </body>
+  </section>
+
+  <section class="row" aria-labelledby="h-current">
+    <h2 id="h-current">Current work</h2>
+    <div class="body">
+      <ul class="items">
+        <li>
+          <h3>LLM agents that adapt a speech recognition model <span class="tag">under review</span></h3>
+          <p>LLM agents adapt a speech recognition model (Whisper) to a new speech domain, for example telephone, accented or medical speech, without losing quality on other speech. Across 27 runs with three LLMs, the agents improved the word error rate on held-out data in every domain. From the agents' traces I built rule-based controllers that run without an LLM.</p>
+          <p class="meta">Manuscript, 2026</p>
+        </li>
+        <li>
+          <h3>AI clinical scribe for Kazakh and Russian <span class="tag">ongoing</span></h3>
+          <p>A collaboration with Prof. Helen Chen's group at the University of Waterloo on an AI clinical scribe for Kazakh and Russian doctor–patient conversations. I contribute the speech recognition side.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="row" aria-labelledby="h-pubs">
+    <h2 id="h-pubs">Publications</h2>
+    <div class="body">
+      <ul class="items">
+        <li>
+          <h3>Persona-ASR: Bilingual Target-Speaker Speech Recognition for Kazakh–English Overlapping Speech</h3>
+          <p class="authors"><strong>Meiramov, R.</strong><span aria-hidden="true">†</span><span class="vh"> (equal contribution)</span>, Rakhimzhanova, T.<span aria-hidden="true">†</span><span class="vh"> (equal contribution)</span>, Taibassarov, A., Makhataeva, Z., and Varol, H. A.</p>
+          <p class="meta">Machine Learning and Knowledge Extraction, 8(8), 246 · 2026 · <a href="https://doi.org/10.3390/make8080246">DOI<span class="vh"> for Persona-ASR</span></a> · <a href="https://github.com/IS2AI/Persona_ASR">Code<span class="vh"> for Persona-ASR</span></a><br><span aria-hidden="true">† Equal contribution</span></p>
+          <p class="about">Target-speaker ASR transcribes one chosen speaker from overlapping speech. Persona-ASR is the first such system for Kazakh. It adds an explicit step that decides whether the target speaker is present, which turns silent hallucination for an absent speaker into a decision that can be evaluated. The paper also releases two bilingual Kazakh–English benchmarks, KazMix3 and PersonaMix.</p>
+        </li>
+        <li>
+          <h3>Improved Kazakh Named Entity Transcription Using Synthetic Speech</h3>
+          <p class="authors"><strong>Meiramov, R.</strong> and Varol, H. A.</p>
+          <p class="meta">UBMK, 10th International Conference on Computer Science and Engineering (IEEE), Istanbul, Türkiye · 2025 · <a href="https://doi.org/10.1109/UBMK67458.2025.11242232">DOI<span class="vh"> for the named entity paper</span></a> · <a href="https://github.com/IS2AI/KazNERD_ASR">Data and code<span class="vh"> for the named entity paper</span></a></p>
+          <p class="about">Synthetic speech with LLM-based entity substitution improved the transcription of Kazakh named entities. The paper introduces a named-entity WER metric and a human-read test set, to verify that the gains held on real speech.</p>
+        </li>
+        <li>
+          <h3>Enhancing Human Pose Estimation Accuracy Using Synthetic Data</h3>
+          <p class="authors"><strong>Meiramov, R.</strong>, Balgabekova, Z., Varol, H. A., and Yazici, A.</p>
+          <p class="meta">IECON, 50th Annual Conference of the IEEE Industrial Electronics Society, Chicago, USA · 2024 · <a href="https://doi.org/10.1109/IECON55916.2024.10905551">DOI<span class="vh"> for the pose estimation paper</span></a></p>
+        </li>
+        <li>
+          <h3>A Machine Learning-Based Microseismic Event Location and Wave Velocity Prediction</h3>
+          <p class="authors">Maksut, Z., <strong>Meiramov, R.</strong> et al.</p>
+          <p class="meta">15th ISRM Congress (International Society for Rock Mechanics), Salzburg, Austria · 2023</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="row" aria-labelledby="h-code">
+    <h2 id="h-code">Models and code</h2>
+    <div class="body">
+      <ul class="items">
+        <li>
+          <h3>Whisper for Kazakh and Russian</h3>
+          <p>Fine-tuned OpenAI Whisper for Kazakh and Russian. Released <a href="https://huggingface.co/RakhatM/whisper-large-v3-turbo-kk-lora">whisper-large-v3-turbo-kk-lora</a>, a Kazakh LoRA adapter trained on a single 16&nbsp;GB consumer GPU, with training and evaluation code and cross-domain results on three test sets.</p>
+        </li>
+        <li>
+          <h3>Fine-tuning LLMs: Kazakh questions to SQL</h3>
+          <p>Materials for a two-day course on fine-tuning LLMs that I taught to ML engineers in October 2026. One small model (Qwen3-1.7B) learns to turn questions in Kazakh into SQL queries. The steps are SFT with QLoRA, DPO, GRPO, evaluation and serving with vLLM.</p>
+          <p class="meta"><a href="https://github.com/RakhatMM/llm-finetuning-course">Code<span class="vh"> for the course</span></a> · <a href="https://huggingface.co/datasets/RakhatM/kazakh-text-to-sql">Dataset</a> · Models: <a href="https://huggingface.co/RakhatM/qwen3-1.7b-kazakh-text-to-sql-sft">SFT</a>, <a href="https://huggingface.co/RakhatM/qwen3-1.7b-kazakh-text-to-sql-dpo">DPO</a>, <a href="https://huggingface.co/RakhatM/qwen3-1.7b-kazakh-text-to-sql-grpo">GRPO</a></p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="row" aria-labelledby="h-exp">
+    <h2 id="h-exp">Experience</h2>
+    <div class="body">
+      <ul class="items roles">
+        <li>
+          <div class="what">
+            <h3>Senior Data Scientist</h3>
+            <p>ISSAI, Nazarbayev University. Data Scientist until October 2026. Besides the work above, I contributed to ISSAI's real-time AI avatar assistant, which combines in-house ASR, LLM and TTS models and is served with vLLM.</p>
+          </div>
+          <div class="when">May 2024 – present</div>
+        </li>
+        <li>
+          <div class="what">
+            <h3>Research Assistant</h3>
+            <p>ISSAI, Nazarbayev University. Master's thesis on synthetic data from NVIDIA Isaac Sim for human pose estimation.</p>
+          </div>
+          <div class="when">Jun 2023 – May 2024</div>
+        </li>
+        <li>
+          <div class="what">
+            <h3>Research Assistant</h3>
+            <p>Computer Science Department, Nazarbayev University. Machine learning methods for microseismic event localization and wave velocity prediction.</p>
+          </div>
+          <div class="when">Jun 2020 – Jun 2023</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="row" aria-labelledby="h-edu">
+    <h2 id="h-edu">Education</h2>
+    <div class="body">
+      <ul class="items roles">
+        <li>
+          <div class="what">
+            <h3>M.S. Computer Science</h3>
+            <p>Nazarbayev University. Graduated with Honors (top 10%); Dean's List.</p>
+          </div>
+          <div class="when">2022 – 2024</div>
+        </li>
+        <li>
+          <div class="what">
+            <h3>B.S. Computer Science</h3>
+            <p>Nazarbayev University.</p>
+          </div>
+          <div class="when">2018 – 2022</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="row" aria-labelledby="h-honors">
+    <h2 id="h-honors">Programs and honors</h2>
+    <div class="body">
+      <ul class="items roles">
+        <li>
+          <div class="what">
+            <h3>International Visitor Leadership Program (IVLP), Artificial Intelligence</h3>
+            <p>U.S. Department of State. One of six delegates from Kazakhstan selected by the U.S. Embassy for an IVLP program on AI engagement between Kazakhstan and the U.S. Discussed AI research, HPC infrastructure and AI policy with researchers at CMU, Stanford and UC Berkeley, and with U.S. policymakers.</p>
+          </div>
+          <div class="when">Jun 2025</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="foot">
+    <p>Languages: Kazakh (native), Russian (fluent), English (IELTS 7.5). Last updated November 2026.</p>
+  </footer>
+
+</div>
+</body>
 </html>
-                        
